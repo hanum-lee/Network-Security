@@ -17,5 +17,6 @@ for tup in longestfrequent:
     if(tup[1] > 24 ):
         print("Longest that occurs more than 25 times: " + tup[0])
         break
-
+#use xxd to view transimtions
+#transmittion files are in binary
 f.close()
