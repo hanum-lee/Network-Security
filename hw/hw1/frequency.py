@@ -1,4 +1,9 @@
 from collections import Counter
 
-file = open("ulysses.txt","r")
-print(file)
+
+f = open("ulysses.txt","r",encoding='UTF-8')
+lines = f.readlines()
+for line in lines:
+    print(line)
+#print(line)
+f.close()
