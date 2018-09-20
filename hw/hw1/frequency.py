@@ -1,4 +1,5 @@
 from collections import Counter
+from itertools import cycle
 
 f = open("ulysses.txt","r",encoding='UTF-8')
 without_space = []
@@ -35,6 +36,9 @@ with open("transmission1", "rb") as b:
         # Do stuff with byte.
         byte = b.read(1)
 
-print(textwithspace[pineindex:(len(transfile)+ pineindex)])
-
-print(len(transfile))
+#print(textwithspace[pineindex:(len(transfile)+ pineindex)])
+transtext = textwithspace[pineindex:(len(transfile)+ pineindex)]
+key = [ chr(ord(a) ^ b) for (a,b) in zip(transtext, transfile) ]
+print(key)
+#key for transmission 1 and 2 is snowboard
+#print(len(transfile))
