@@ -23,12 +23,18 @@ for tup in longestfrequent:
 #transmittion files are in binary
 f.close()
 #print(textwithspace)
-trasfile = []
+transfile = []
+pineindex = textwithspace.find("Pineapple rock")
+#print(textwithspace.find("[ 8 ]"))
 
 with open("transmission1", "rb") as b:
     byte = b.read(1)
     while byte:
         #print(byte)
-
+        transfile+=byte
         # Do stuff with byte.
         byte = b.read(1)
+
+print(textwithspace[pineindex:(len(transfile)+ pineindex)])
+
+print(len(transfile))
