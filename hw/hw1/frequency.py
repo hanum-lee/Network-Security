@@ -2,8 +2,10 @@ from collections import Counter
 
 f = open("ulysses.txt","r",encoding='UTF-8')
 without_space = []
+textwithspace = ""
 lines = f.readlines()
 for line in lines:
+    textwithspace += line
     temp = line.split()
     without_space += temp
 frequency = Counter(without_space)
@@ -20,10 +22,13 @@ for tup in longestfrequent:
 #use xxd to view transimtions
 #transmittion files are in binary
 f.close()
+#print(textwithspace)
+trasfile = []
 
 with open("transmission1", "rb") as b:
     byte = b.read(1)
     while byte:
-        print(byte)
+        #print(byte)
+
         # Do stuff with byte.
         byte = b.read(1)
