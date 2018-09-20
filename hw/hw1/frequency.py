@@ -20,3 +20,10 @@ for tup in longestfrequent:
 #use xxd to view transimtions
 #transmittion files are in binary
 f.close()
+
+with open("transmission1", "rb") as b:
+    byte = b.read(1)
+    while byte:
+        print(byte)
+        # Do stuff with byte.
+        byte = b.read(1)
