@@ -42,7 +42,14 @@ key = [ chr(ord(a) ^ b) for (a,b) in zip(transtext, transfile) ]
 print(key)
 predictedkey = "snowboard"
 
-t2 = open("transmission2","rb")
+#t2 = open("transmission2","rb")
+with open("transmission2", "rb") as t2:
+    byte = t2.read(1)
+    while byte:
+        #print(byte)
+        transfile+=byte
+        # Do stuff with byte.
+        byte = t2.read(1)
 trans2 = [ chr(ord(a) ^ ord(b)) for (a,b) in zip(var, cycle(predictedkey)) ]
 
 #key for transmission 1 and 2 is snowboard
