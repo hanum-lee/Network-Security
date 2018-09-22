@@ -91,10 +91,11 @@ trans3t =  ''.join(chr(ord(a) ^ ord(b)) for (a,b) in zip(quest3, cycle(trans3)))
     print(trans3t[oc:oc+100])'''
 #print(trans3t[indexthe:indexthe + 100])
 #question3.replace("\n","")
-#print("Trans3" + str(trans3t))
+print("Trans3" + str(trans3t))
 t3.close()
 #print(quest3)
 
+'''
 for n in range(1, len(trans3t)):
     substr_counter = Counter(trans3t[i: i+n] for i in range(len(trans3t) - n))
     phrase, count = substr_counter.most_common(1)[0]
@@ -102,4 +103,4 @@ for n in range(1, len(trans3t)):
         break
     print ('Size: %3d:  Occurrences: %3d  Phrase: %r' % (n, count, phrase))
 
-
+'''
