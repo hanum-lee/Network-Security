@@ -81,7 +81,11 @@ lines = t3.readlines()
 for line in lines:
     trans3 += line
 
+t3.close()
+print(len(trans3))
 #print(trans3)
+trans3test = Counter(trans3)
+print("trans3test: " , len(trans3test) )
 
 trans3t =  ''.join(chr(ord(a) ^ ord(b)) for (a,b) in zip(quest3, cycle(trans3)))
 #indexthe = [m.start() for m in re.finditer('the', trans3t)]
@@ -91,16 +95,14 @@ trans3t =  ''.join(chr(ord(a) ^ ord(b)) for (a,b) in zip(quest3, cycle(trans3)))
     print(trans3t[oc:oc+100])'''
 #print(trans3t[indexthe:indexthe + 100])
 #question3.replace("\n","")
-print("Trans3" + str(trans3t))
-t3.close()
+#print("Trans3" + str(trans3t))
+
 #print(quest3)
 
-'''
+
 for n in range(1, len(trans3t)):
     substr_counter = Counter(trans3t[i: i+n] for i in range(len(trans3t) - n))
     phrase, count = substr_counter.most_common(1)[0]
     if count == 1:      # early out for trivial cases
         break
     print ('Size: %3d:  Occurrences: %3d  Phrase: %r' % (n, count, phrase))
-
-'''
