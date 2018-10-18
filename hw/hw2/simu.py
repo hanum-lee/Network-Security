@@ -1,11 +1,13 @@
 
-int time
+class Service:
 
-def service():
-
-
+    def __init__(self):
 
 
-def user():
-    int issuedtime
-    int expirytime
+
+
+class User:
+    int issuedtime = 0;
+    int expirytime = 0;
+
+    def __init__(self):
