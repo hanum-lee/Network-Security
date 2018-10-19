@@ -1,13 +1,19 @@
 
-class Service:
+currenttime = 0
 
-    def __init__(self):
+class Service:
+    occupided = false
+
+
 
 
 
 
 class User:
-    int issuedtime = 0;
-    int expirytime = 0;
-
-    def __init__(self):
+    issuedtime = 0
+    expirytime = 0
+    ticket = false
+    requesttime = 0
+    def checkval():
+        if(expirytime - currenttime > 0)
+            ticket = true
