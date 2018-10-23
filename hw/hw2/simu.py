@@ -3,7 +3,7 @@ import random
 
 global currenttime 
 currenttime = 0
-random.seed(2)
+random.seed(4)
 class Service:
     numOfTicektIssued = 0
 
@@ -17,7 +17,6 @@ class User:
             self.ticket = True
         else:
             self.ticket = False
-
 
     def setIssuedTime(self,time):
         self.issuedtime = time
