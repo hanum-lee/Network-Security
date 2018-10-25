@@ -3,9 +3,16 @@ import sys
 import string
 
 
-ph = PasswordHasher()
-#db = open("database.txt","a",encoding="UTF-8")
+def checkValid(inputid):
 
+    if(len([item for item in database if item[0] == inputid]) > 0):
+        return False
+    else:
+        return True
+
+
+#Basic setup
+ph = PasswordHasher()
 database = []
 with open("database.txt") as fp:
     for i in fp.readlines():
@@ -23,6 +30,8 @@ with open("words.txt") as dc:
 
 words = [x.strip() for x in lines]
 
+print(checkValid(sys.argv[1]))
+
 print(sys.argv[0],sys.argv[1],sys.argv[2])
 print(words[1])
 print(database[1])
@@ -39,5 +48,3 @@ print(ph.check_needs_rehash(hash))
 
 
 
-
-#db.close()
