@@ -3,15 +3,6 @@ import sys
 import string
 
 
-def checkValid(inputid):
-
-    if(len([item for item in database if item[0] == inputid]) > 0):
-        return False
-    else:
-        return True
-
-
-#Basic setup
 ph = PasswordHasher()
 database = []
 with open("database.txt") as fp:
@@ -30,7 +21,28 @@ with open("words.txt") as dc:
 
 words = [x.strip() for x in lines]
 
-print(checkValid(sys.argv[1]))
+def checkValidID(inputid):
+
+    if(len([item for item in database if item[0] == inputid]) > 0):
+        return False
+    else:
+        return True
+
+
+def checkValidPassword(inputpw):
+    try:
+        float(inputpw)
+        return False
+    except ValueError:
+        pass
+    if(words.index("inputpw") > 0):
+        return False
+    
+
+#Basic setup
+
+
+print(checkValidID(sys.argv[1]))
 
 print(sys.argv[0],sys.argv[1],sys.argv[2])
 print(words[1])
