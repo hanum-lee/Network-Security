@@ -37,6 +37,8 @@ def checkValidPassword(inputpw):
         pass
     if(words.index("inputpw") > 0):
         return False
+
+    
     
 
 #Basic setup
