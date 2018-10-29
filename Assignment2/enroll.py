@@ -18,7 +18,7 @@ with open("words.txt") as dc:
 words = [x.strip() for x in lines]
 
 for x in words:
-    x.lower();
+    x.lower()
 
 def checkDic(inputwd):
     try:
@@ -76,18 +76,29 @@ def checkValidPassword(inputpw):
     return True
     #if():
 
+
+def main():
+    print("Testing")
+    if(not checkValidID(sys.argv[1])):
+        print("Invalid ID")
+        return -1
+
+    #print("Check pw:",checkValidPassword(sys.argv[2]))
+    if(not (checkValidPassword(sys.argv[2]))):
+        print("Invalid Password")
+        return -1
 #Basic setup
 
 #print("Check id:",checkValidID(sys.argv[1]))
-if(not checkValidID(sys.argv[1])):
-    print("Invalid ID")
 
-#print("Check pw:",checkValidPassword(sys.argv[2]))
-if(not (checkValidPassword(sys.argv[2]))):
-    print("Invalid Password")
-print(sys.argv[0],sys.argv[1],sys.argv[2])
-print(words[1])
-print(database[1])
+if __name__ == "__main__":
+    main()
+
+
+
+#print(sys.argv[0],sys.argv[1],sys.argv[2])
+#print(words[1])
+#print(database[1])
 
 hash = ph.hash("Test")
 print(hash)
