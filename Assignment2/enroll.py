@@ -79,14 +79,29 @@ def checkValidPassword(inputpw):
 
 def main():
     print("Testing")
-    if(not checkValidID(sys.argv[1])):
+    userid = sys.argv[1]
+    userpw = sys.argv[2]
+
+    if(not checkValidID(userid)):
         print("Invalid ID")
         return -1
 
     #print("Check pw:",checkValidPassword(sys.argv[2]))
-    if(not (checkValidPassword(sys.argv[2]))):
+    if(not (checkValidPassword(userpw))):
         print("Invalid Password")
         return -1
+    
+    hash = ph.hash(userpw)
+
+    userpair = "\n"+userid+" "+hash
+    print("UserPair:",userpair)
+    with open("database.txt", "a") as db:
+        db.write(userpair)
+
+    return 0
+
+
+
 #Basic setup
 
 #print("Check id:",checkValidID(sys.argv[1]))
