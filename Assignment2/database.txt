@@ -2,3 +2,4 @@ test test1
 test2 test3
 test4 $argon2id$v=19$m=102400,t=2,p=8$rKA/HUe1os0da4zB5CzMwA$cFVZGR/xGqPX6jkOOoNKow
 test5 $argon2id$v=19$m=102400,t=2,p=8$WjqbDYuykUl3bHJAdZ4YLg$8yMEt0RNMqCJ6cVoBI8EBw
+test10 $argon2id$v=19$m=102400,t=2,p=8$2yRZs+AxnjjPuADvoCQlBQ$fkutFVJDP9/ecGH+H9rmNQ

@@ -24,7 +24,8 @@ def authen(userid,inputpw):
         print("Not valid ID")
         return -1
     savedhash = database[index][1]
-    if(ph.verify(inputpw,savedhash)):
+    try:
+        ph.verify(savedhash,inputpw)
         print("Mached!")
         if(ph.check_needs_rehash(savedhash)):
             database[index][1] = ph.hash(inputpw)
@@ -32,6 +33,18 @@ def authen(userid,inputpw):
                 for tup in database:
                     db.write(tup[0]+" "+tup[1]+"\n")
         return 0
+
+#    if(ph.verify(savedhash,inputpw)):
+#        print("Mached!")
+#        if(ph.check_needs_rehash(savedhash)):
+#            database[index][1] = ph.hash(inputpw)
+#            with open("database.txt","w") as db:
+#                for tup in database:
+#                    db.write(tup[0]+" "+tup[1]+"\n")
+#        return 0
+    except Exception as e:
+        print("Not correct password")
+    #print("Not Matched")
     return -1
 
 
