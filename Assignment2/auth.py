@@ -21,7 +21,7 @@ def checkValidID(inputid):
 def authen(userid,inputpw):
     index = checkValidID(userid)
     if(index < 0):
-        print("Not valid")
+        print("Not valid ID")
         return -1
     savedhash = database[index][1]
     if(ph.verify(inputpw,savedhash)):
@@ -31,7 +31,8 @@ def authen(userid,inputpw):
             with open("database.txt","w") as db:
                 for tup in database:
                     db.write(tup[0]+" "+tup[1]+"\n")
-    return 0
+        return 0
+    return -1
 
 
 def main():
