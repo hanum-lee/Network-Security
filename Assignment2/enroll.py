@@ -3,7 +3,6 @@ import sys
 import string
 import re
 
-
 ph = PasswordHasher()
 database = []
 with open("database.txt") as fp:
@@ -11,12 +10,8 @@ with open("database.txt") as fp:
         tmp = i.split()
         try:
             database.append((tmp[0], tmp[1]))
-            #result.append((eval(tmp[0]), eval(tmp[1])))
         except:pass
 
-#with open("database.txt") as db:
-#    database = [tuple(map(string, i.split(","))) for i in db]
-#database = result
 with open("words.txt") as dc:
     lines = dc.readlines()
 
@@ -24,8 +19,6 @@ words = [x.strip() for x in lines]
 
 for x in words:
     x.lower();
-
-#par = re.compile[]
 
 def checkDic(inputwd):
     try:
@@ -83,15 +76,15 @@ def checkValidPassword(inputpw):
     return True
     #if():
 
-
-
-
 #Basic setup
 
+#print("Check id:",checkValidID(sys.argv[1]))
+if(not checkValidID(sys.argv[1])):
+    print("Invalid ID")
 
-print("Check id:",checkValidID(sys.argv[1]))
-print("Check pw:",checkValidPassword(sys.argv[2]))
-
+#print("Check pw:",checkValidPassword(sys.argv[2]))
+if(not (checkValidPassword(sys.argv[2]))):
+    print("Invalid Password")
 print(sys.argv[0],sys.argv[1],sys.argv[2])
 print(words[1])
 print(database[1])
