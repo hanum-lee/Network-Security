@@ -1,2 +1,7 @@
 test17 $argon2id$v=19$m=102400,t=2,p=8$+x7PdokCUX49Cw8r1IZj+w$04v1PgDvO76VgLfr3Shq2A
 test15 $argon2id$v=19$m=102400,t=2,p=8$AlxEfpwUbcsOcoeYUVLKzg$LjlVAxIUqyJ3E6bG8xlT6Q
+
+test16 $argon2id$v=19$m=102400,t=2,p=8$YqukcxqBfdRJAdviMydpig$fSoME2d/omyzeyiXmr00Eg
+test101 $argon2id$v=19$m=102400,t=2,p=8$fK6rSDXS1qyBCaqKNxPcjQ$XUDQPtMxvexDBNQ4M7pDww
+test102 $argon2id$v=19$m=102400,t=2,p=8$WYvEecyBlRAt87NjmSnvfg$DjQayf1auQg8ij8cfuYVHQ
+test50 $argon2id$v=19$m=102400,t=2,p=8$Cs8VDXnI+XpJ7cDwoFUdFw$x/AX7EV/joKokSfcBg1EgQ
