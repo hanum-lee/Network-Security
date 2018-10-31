@@ -21,12 +21,12 @@ def checkValidID(inputid):
 def authen(userid,inputpw):
     index = checkValidID(userid)
     if(index < 0):
-        print("Not valid ID")
+        print("Not valid ID. Access Denied")
         return -1
     savedhash = database[index][1]
     try:
         ph.verify(savedhash,inputpw)
-        print("Mached!")
+        print("Access Granted")
         if(ph.check_needs_rehash(savedhash)):
             database[index][1] = ph.hash(inputpw)
             with open("database.txt","w") as db:
@@ -43,7 +43,7 @@ def authen(userid,inputpw):
 #                    db.write(tup[0]+" "+tup[1]+"\n")
 #        return 0
     except Exception as e:
-        print("Not correct password")
+        print("Not correct password. Access Denied")
     #print("Not Matched")
     return -1
 
@@ -51,12 +51,12 @@ def authen(userid,inputpw):
 def main():
     userid = sys.argv[1]
     userpw = sys.argv[2]
-    print("index:",checkValidID(userid))
+    #print("index:",checkValidID(userid))
     pos = checkValidID(userid)
     #print("hash:",database[pos][1])
     authen(userid,userpw)
 
-    
+
 
 
 
