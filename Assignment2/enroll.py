@@ -3,23 +3,22 @@ import sys
 import string
 import re
 
-ph = PasswordHasher()
+ph = PasswordHasher()  #setting up password hashing. Hashing password 2 times
 database = []
+# Importing database as list of tuple
 with open("database.txt") as fp:
     for i in fp.readlines():
         tmp = i.split()
         try:
             database.append((tmp[0], tmp[1]))
         except:pass
-
+# Importing dictionary
 with open("words.txt") as dc:
     lines = dc.readlines()
-
 words = [x.strip() for x in lines]
-
 for x in words:
     x.lower()
-
+# Checking if the dictionary contains inputed word
 def checkDic(inputwd):
     try:
         words.index(inputwd)
@@ -27,90 +26,57 @@ def checkDic(inputwd):
         return True
     except:
         return False
-
-
+# Check if the ID inputed by user is valid
 def checkValidID(inputid):
-
     if(len([item for item in database if item[0] == inputid]) > 0):
         return False
     else:
         return True
-
-
+# Check if the password inputed by user is valid
 def checkValidPassword(inputpw):
-#    try:
-#        float(inputpw)
-#        return False
-#    except ValueError:
-#        pass
+    # Checks if the password only contains numbers
     if(re.match(r'^([\s\d]+)$',inputpw)):
         print("Only numbers")
         return False
-#    try:
-#        words.index(inputpw)
-#        print("Password in dictionary")
-#        return False
-#    except:
-        #return True
-#        pass
+    # Check if the password only contains word that is in dictionary
     if(checkDic(inputpw)):
         return False
     try:
+        # Checks if the password is the type of [wordnum] where word is in dictionary
         m = re.match(r"(\d+)(\w+)", inputpw)
-#        print("Group1:", m.group(1))
-#        print("Groupt2:" ,m.group(2))
-#        print("Num first")
         if(checkDic(m.group(2))):
             return False
     except:
         pass
     try:
+        # Checks if the password is the type of [numword] where word is in dictionary
         m = re.match(r"(\w+)(\d+)", inputpw)
-#        print("Group1:", m.group(1))
-#        print("Groupt2:" ,m.group(2))
-#        print("Word First")
         if(checkDic(m.group(1))):
             return False
     except:
         pass
     return True
-    #if():
 
 
 def main():
+    # Gets user inputed ID and password
     userid = sys.argv[1]
     userpw = sys.argv[2]
-
+    # Runs through the validation methods for ID and password
     if(not checkValidID(userid)):
         print("Invalid ID. Rejected")
         return -1
-
-    #print("Check pw:",checkValidPassword(sys.argv[2]))
     if(not (checkValidPassword(userpw))):
         print("Invalid Password. Rejected")
         return -1
-
+    # If everything is fine, hash the password and save it to database
     hash = ph.hash(userpw)
-
     userpair = "\n"+userid+" "+hash
-    #print("UserPair:",userpair)
     print("Accept")
     with open("database.txt", "a") as db:
         db.write(userpair)
 
     return 0
 
-
-
-#Basic setup
-
-#print("Check id:",checkValidID(sys.argv[1]))
-
 if __name__ == "__main__":
     main()
-
-
-
-#print(sys.argv[0],sys.argv[1],sys.argv[2])
-#print(words[1])
-#print(database[1])
