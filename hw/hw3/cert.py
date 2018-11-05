@@ -4,7 +4,7 @@ import re
 import requests
 import ssl
 import socket
-import OpenSSL
+import M2Crypto
 
 
 url = "https://www.alexa.com/topsites/category/Top/Games"
@@ -44,8 +44,8 @@ print(existsite[0])
 adds = socket.gethostbyname(justurl)
 print("IP:",adds)
 tempcert = ssl.get_server_certificate((adds,443))
-x509 = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, cert)
-x509.get_subject().get_components()
+#x509 = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, cert)
+#x509.get_subject().get_components()
 print("Cert:",ssl.get_server_certificate((adds,443)))
 #for site in truesites:
 #    m = re.match(r'(?<=\>)(.*?)(?=\<)', str(site))
