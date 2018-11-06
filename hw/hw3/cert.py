@@ -5,6 +5,8 @@ import requests
 import ssl
 import socket
 import M2Crypto
+from datetime import datetime as dt
+from collections import Counter
 
 
 url = "https://www.alexa.com/topsites/category/Top/Games"
@@ -28,7 +30,7 @@ for site in sitesurl:
         if (request.status_code == 200) | (request.status_code == 300):
             print("Exist:",site)
             existsite.append(site)
-            break
+            #break
         else:
             print("Not Exist:",site)
     except Exception as e:
@@ -36,18 +38,37 @@ for site in sitesurl:
 
 print("Amount of website works:",len(existsite))
 
-m = re.search(r'(?<=http://www.)(.*)',existsite[0])
-justurl = m.group(1)
-print("just url",justurl)
-print(type(existsite[0]))
-print(existsite[0])
-adds = socket.gethostbyname(justurl)
-print("IP:",adds)
-tempcert = ssl.get_server_certificate((adds,443))
-x509 = M2Crypto.X509.load_cert_string(tempcert)
+issuers=[]
+dates=[]
 
-print("Cert:",ssl.get_server_certificate((adds,443)))
-print("Cert info:",x509.get_subject().as_text())
+for site in existsite:
+    m = re.search(r'(?<=http://www.)(.*)',site)
+    justurl = m.group(1)
+    print("just url",justurl)
+    try:
+        adds = socket.gethostbyname(justurl)
+        print("IP:",adds)
+        tempcert = ssl.get_server_certificate((adds,443))
+        x509 = M2Crypto.X509.load_cert_string(tempcert)
+        ssl.get_server_certificate((adds,443))
+        issuer = str(x509.get_issuer())
+        print("Issuer:",issuer)
+        issuers.append(issuer)
+        validdate = str(x509.get_not_after())
+        print("Not after:",validdate)
+        #print(type(str(validdate)))
+        certval = dt.strptime(validdate,"%b %d %H:%M:%S %Y %Z")
+        if certval  > dt(2019,12,31):
+            dates.append(validdate)    
+    except Exception as e:
+        print(e)
+
+print(len(dates))
+count = Counter(issuers)
+print(count.most_common(1))
+#print("Cert:")
+#print("Cert info:",x509.get_subject().as_text())
+
 #for site in truesites:
 #    m = re.match(r'(?<=\>)(.*?)(?=\<)', str(site))
 #    print("Site:",m)
