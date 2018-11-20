@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
   strcpy(source_ip, "127.0.0.1");
   struct sockaddr_in sai;
   sai.sin_family = AF_INET;
-  sai.sin_port = htons(80);
+  sai.sin_port = htons(30205);
 
   sai.sin_addr.s_addr = inet_addr("127.0.0.1");
   cout << "sai.sin_addr.s_addr=" << sai.sin_addr.s_addr << endl;
@@ -136,8 +136,8 @@ int main(int argc, char *argv[])
   //TCP Header
   struct tcphdr *tcph = (struct tcphdr *) (datagram + sizeof(struct ip));
   struct pseudo_header psh;
-  tcph->th_sport = htons(80);
-  tcph->th_dport = htons(80);
+  tcph->th_sport = htons(30010);
+  tcph->th_dport = htons(30205);
   tcph->th_seq = 0;
   tcph->th_ack = 0;
   tcph->th_off = 5;

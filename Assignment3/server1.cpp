@@ -15,8 +15,7 @@
 #include <sys/wait.h>
 #include <signal.h>
 
-//#define PORT "3490"  // the port users will be connecting to
-#define PORT "30205"  // the port users will be connecting to
+#define PORT "3490"  // the port users will be connecting to
 
 #define BACKLOG 10	 // how many pending connections queue will hold
 
@@ -114,6 +113,7 @@ int main(void)
 		new_fd = accept(sockfd, (struct sockaddr *)&their_addr, &sin_size);
 		if (new_fd == -1) {
 			perror("accept");
+			usleep(1000);
 			continue;
 		}
 
