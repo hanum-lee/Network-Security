@@ -49,6 +49,24 @@ unsigned short CheckSum(unsigned short *buffer, int size){
 }
 
 
+unsigned short TcpCheckSum(struct ip* iph, struct tcphdr* tcph,char* data,int size, struct pseudo_header *psh)
+{
+	tcph->Chksum=0;
+/*	struct pseudo_header psd_header;
+	psd_header.m_daddr=iph->ip_dst;
+	psd_header.m_saddr=iph->ip_src;
+	psd_header.m_mbz=0;
+	psd_header.m_ptcl=IPPROTO_TCP;
+	psd_header.m_tcpl=htons(sizeof(TCP)+size);
+*/
+	char tcpBuf[65536];
+	memcpy(tcpBuf,&psd,sizeof(psd));
+	memcpy(tcpBuf+sizeof(pseudo_header),tcph,sizeof(tcphdr));
+	memcpy(tcpBuf+sizeof(pseudo_header)+sizeof(tcphdr),data,size);
+	return tcph->Chksum=CheckSum((unsigned short *)tcpBuf,
+		sizeof(psd)+sizeof(tcphdr)+size);
+}
+
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa)
 {
@@ -64,7 +82,7 @@ void *get_in_addr(struct sockaddr *sa)
 int main(int argc, char *argv[])
 {
 	int sockfd, numbytes;
-	char buf[MAXDATASIZE];
+	/*char buf[MAXDATASIZE];
 	struct addrinfo hints, *servinfo, *p;
 	int rv;
 	char s[INET6_ADDRSTRLEN];
@@ -81,7 +99,7 @@ int main(int argc, char *argv[])
 	if ((rv = getaddrinfo(argv[1], PORT, &hints, &servinfo)) != 0) {
 		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
 		return 1;
-	}
+	}*/
 
 	// loop through all the results and connect to the first we can
 
@@ -136,11 +154,11 @@ int main(int argc, char *argv[])
   //TCP Header
   struct tcphdr *tcph = (struct tcphdr *) (datagram + sizeof(struct ip));
   struct pseudo_header psh;
-  tcph->th_sport = htons(30010);
+  tcph->th_sport = htons(30011);
   tcph->th_dport = htons(30205);
   tcph->th_seq = 0;
   tcph->th_ack = 0;
-  tcph->th_off = 5;
+  tcph->th_off = 0;
   tcph->th_flags = TH_SYN;
   tcph->th_win  = htons(5840); /* maximum allowed window size */
   tcph->th_sum = 0;
@@ -202,7 +220,7 @@ int main(int argc, char *argv[])
 		close(sockfd);
 		return 1;
 	}*/
-
+/*
 	if (p == NULL) {
 		fprintf(stderr, "client: failed to connect\n");
 		return 2;
@@ -213,6 +231,7 @@ int main(int argc, char *argv[])
 	printf("client: connecting to %s\n", s);
 
 	freeaddrinfo(servinfo); // all done with this structure
+  */
 /*
 	if ((numbytes = recv(sockfd, buf, MAXDATASIZE-1, 0)) == -1) {
 	    perror("recv");
