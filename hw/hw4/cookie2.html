@@ -24,11 +24,10 @@
             return "";
         }
         function makeCookie() {
-            setCookie("secret","Z29vZCB3b3JrIQo=", 5);
+            setCookie("secret1","Z29vZCB3b3JrIQo=", 5);
             document.getElementById("d").textContent = document.cookie;
             document.getElementById("a").textContent = getCookie("secret");
-            var iframe1 = document.getElementById("myFrame");
-            iframe1.contentWindow.document.getElementById("d").textContent = document.cookie;
+
         }
 
 
@@ -38,5 +37,9 @@
     Your cookie is <div id="d"></div>
     Cookie got <div id="a"></div>
     <iframe id = "another" src = "cookie1.html" style="height:300px;width:30%"><\iframe>
+    <script>
+      var iframe1 = document.getElementById("another");
+      iframe1.contentWindow.document.getElementById("d").textContent = iframe1.contentDocument.cookie;
+    </script>
 
 </body></html>

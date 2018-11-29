@@ -59,7 +59,7 @@ for site in existsite:
         #print(type(str(validdate)))
         certval = dt.strptime(validdate,"%b %d %H:%M:%S %Y %Z")
         if certval  > dt(2019,12,31):
-            dates.append(validdate)    
+            dates.append(validdate)
     except Exception as e:
         print(e)
 
