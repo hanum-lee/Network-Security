@@ -27,11 +27,16 @@
             setCookie("secret","Z29vZCB3b3JrIQo=", 5);
             document.getElementById("d").textContent = document.cookie;
             document.getElementById("a").textContent = getCookie("secret");
+            var iframe1 = document.getElementById("myFrame");
+            iframe1.contentWindow.document.getElementById("d").textContent = document.cookie;
         }
+
 
         </script>
     </head>
 <body onload="makeCookie()">
     Your cookie is <div id="d"></div>
     Cookie got <div id="a"></div>
+    <iframe id = "another" src = "cookie1.html" style="height:300px;width:30%"><\iframe>
+
 </body></html>
