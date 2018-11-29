@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <script>
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires
+            + ";path=" + document.location.pathname;
+        }
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        function makeCookie() {
+            setCookie("secret","Z29vZCB3b3JrIQo=", 5);
+            document.getElementById("d").textContent = document.cookie;
+            document.getElementById("a").textContent = getCookie("secret");
+        }
+
+        </script>
+    </head>
+<body onload="makeCookie()">
+    Your cookie is <div id="d"></div>
+    Cookie got <div id="a"></div>
+</body></html>
