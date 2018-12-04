@@ -18,7 +18,7 @@ class Rule():
     def setRule(self,allow, tcp, source, dest):
         if (allow == "allow"):
             self.allow = "allow"
-        else if (allow == "deny")
+        elif (allow == "deny"):
             self.allow = "deny"
         if (tcp == "tcp"):
             self.tcp = True
@@ -80,21 +80,23 @@ def filterRule(file):
             rule.setRule(line[0],line[1],line[2],line[4])
             rules.append(rule)
 
-    for rule in rules:
-        rule.printRule()
+    #for rule in rules:
+        #rule.printRule()
 
 
 def decide():
     for packet in packets:
         sorted = False
         for rule in rules:
-            if(rule.tcp == packet.tcp and rule.source == packet.ip_saddr and rule.sourceport == packet.pro_src and rule.dest == packet.ip_daddr and rule.destport == packet.pro_dest)
+            if(rule.tcp == packet.tcp and rule.source == packet.ip_saddr and rule.sourceport == packet.pro_src and rule.dest == packet.ip_daddr and rule.destport == packet.pro_dest):
                 if(rule.allow == "allow"):
                     print("Allow")
                     sorted = True
-                else if (rule.allow == "deny"):
+                    break;
+                elif (rule.allow == "deny"):
                     print("Deny")
                     sorted = True
+                    break;
             if (sorted == False):
                 print("unspecified")
 
@@ -104,6 +106,9 @@ def main():
     packetFile = sys.argv[2]
     filterRule(filterFile)
     #packetProc(packetFile)
+    pac = Packet()
+    pac.setPacket("tcp","127.0.0.1","127.0.0.1","55555","55551")
+    packets.append(pac)
     decide()
 
 
